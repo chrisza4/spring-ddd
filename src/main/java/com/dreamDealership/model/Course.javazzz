@@ -1,0 +1,31 @@
+package com.dreamDealership.model;
+
+public class UserSelectedCourses {
+    private bool isSeasonalDiscount;
+
+    public void Pay() {
+        int price = this.totalPrice();
+        if (this.isSeasonalDiscount) {
+            price = price * 0.10;
+        }
+        // Process to pay
+    }
+}
+
+public class ShoppingCart {
+    public void Pay() {
+        int price = this.totalPrice();
+        if (this.promotion != null) {
+            price = this.promotion.apply(price);
+        }
+        // Process to pay
+    }
+}
+
+public class Promotion {
+    // Constructor to config
+    public int apply(int originalPrice) {
+        // for now we have only one promotion type
+        return originalPrice * 0.10;
+    }
+}
