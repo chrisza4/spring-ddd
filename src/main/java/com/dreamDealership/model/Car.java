@@ -6,12 +6,16 @@ import jakarta.persistence.*;
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    public long id;
 
     public String serial;
     public String name;
     public String description;
 
     @Enumerated(EnumType.STRING)
-    public CarStatus status;
+    public CarStatus status = CarStatus.ScheduledForCollection;
+
+    public Car() {
+
+    }
 }

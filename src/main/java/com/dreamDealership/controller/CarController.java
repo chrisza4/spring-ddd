@@ -12,7 +12,12 @@ public class CarController {
     CarService carService;
 
     @PostMapping("/cars")
-    public Car CreateCar(@RequestBody Car newCar) {
+    public Car createCar(@RequestBody Car newCar) {
         return carService.create(newCar);
+    }
+
+    @GetMapping("/cars")
+    public Iterable<Car> listCars() {
+        return carService.listCars();
     }
 }

@@ -15,4 +15,8 @@ public class CarService {
     public Car create(Car newCar) {
         return carRepository.save(newCar);
     }
+
+    public Iterable<Car> listCars() {
+        return carRepository.findAll();
+    }
 }
