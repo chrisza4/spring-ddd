@@ -6,6 +6,7 @@ import com.dreamDealership.domain.carCollection.valueObject.CarColor;
 import com.dreamDealership.domain.carCollection.valueObject.Status;
 import com.dreamDealership.domain.carCollection.valueObject.VehicleRegistrationId;
 import com.dreamDealership.domain.validation.ValidationException;
+
 import io.micrometer.common.util.StringUtils;
 
 public class CarCollection {

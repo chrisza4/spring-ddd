@@ -1,4 +1,4 @@
-package com.dreamDealership.domain.carCollection;
+package com.dreamDealership.domain.validation;
 
 public class ValidationException extends Exception {
 

@@ -1,4 +1,4 @@
-package com.dreamDealership.domain.carCollection;
+package com.dreamDealership.domain.carCollection.valueObject;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

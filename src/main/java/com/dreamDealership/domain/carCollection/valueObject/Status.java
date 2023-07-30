@@ -1,5 +1,6 @@
-package com.dreamDealership.domain.carCollection;
+package com.dreamDealership.domain.carCollection.valueObject;
 
 public enum Status {
+    Scheduled
 
 }
