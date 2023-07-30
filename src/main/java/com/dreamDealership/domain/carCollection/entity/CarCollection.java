@@ -163,6 +163,10 @@ public class CarCollection {
         this.status = status;
     }
 
+    public void carDroppedToWarehouse() {
+        this.status = Status.Dropped;
+    }
+
     public VehicleRegistrationId getVehicleRegistrationId() {
         return vehicleRegistrationId;
     }
