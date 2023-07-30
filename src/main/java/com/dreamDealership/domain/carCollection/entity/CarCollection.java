@@ -1,6 +1,7 @@
 package com.dreamDealership.domain.carCollection.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import com.dreamDealership.domain.carCollection.valueObject.CarColor;
 import com.dreamDealership.domain.carCollection.valueObject.Coordinate;
@@ -88,6 +89,8 @@ public class CarCollection {
 
     private Coordinate place;
 
+    private List<Pickup> pickups;
+
     public Coordinate getPlace() {
         return place;
     }
@@ -166,5 +169,25 @@ public class CarCollection {
 
     public void setVehicleRegistrationId(VehicleRegistrationId vehicleRegistrationId) {
         this.vehicleRegistrationId = vehicleRegistrationId;
+    }
+
+    public void recordPickup(PickupResult result, String reason) throws ValidationException {
+        var pickup = new Pickup(new Date(), result, reason);
+        var pickupValidateResult = pickup.validate();
+        if (!pickupValidateResult.getIsSuccess()) {
+            throw new ValidationException(pickupValidateResult.getErrorMessage());
+        }
+        if (status != Status.Scheduled) {
+            throw new ValidationException("Car Collection is not scheduled for picking up. Cannot record pickup");
+        }
+
+        pickups.add(pickup);
+        if (pickup.getResult() == PickupResult.Success) {
+            status = Status.PickedUp;
+        }
+    }
+
+    public List<Pickup> listPickups() {
+        throw new UnsupportedOperationException();
     }
 }
