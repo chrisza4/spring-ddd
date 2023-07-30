@@ -3,6 +3,7 @@ package com.dreamDealership.domain.carCollection.entity;
 import java.util.Date;
 
 import com.dreamDealership.domain.carCollection.valueObject.CarColor;
+import com.dreamDealership.domain.carCollection.valueObject.Coordinate;
 import com.dreamDealership.domain.carCollection.valueObject.Status;
 import com.dreamDealership.domain.carCollection.valueObject.VehicleRegistrationId;
 import com.dreamDealership.domain.validation.ValidationException;
@@ -13,11 +14,10 @@ public class CarCollection {
     // Reference, ScheduleTime, Owner, ContactName, ContactPhoneNumber, Address,
     // CarModel, Color, Status, CarRegistrationNumber
 
-    public long id;
-
     public static CarCollection scheduled(String reference, Date scheduleTime, String contactName,
             String contactPhoneNumber,
-            String address, String carModel, CarColor color, VehicleRegistrationId vehicleRegistrationId)
+            String address, String carModel, CarColor color, VehicleRegistrationId vehicleRegistrationId,
+            Coordinate place)
             throws ValidationException {
         var result = new CarCollection();
         if (StringUtils.isBlank(reference)) {
@@ -48,6 +48,10 @@ public class CarCollection {
         if (!vehicleRegistrationIdvalidationResult.getIsSuccess()) {
             throw new ValidationException(vehicleRegistrationIdvalidationResult.getErrorMessage());
         }
+        var coordinateValidationReuslt = place.isValid();
+        if (!coordinateValidationReuslt.getIsSuccess()) {
+            throw new ValidationException(vehicleRegistrationIdvalidationResult.getErrorMessage());
+        }
 
         result.reference = reference;
         result.scheduleTime = scheduleTime;
@@ -58,10 +62,39 @@ public class CarCollection {
         result.color = color;
         result.vehicleRegistrationId = vehicleRegistrationId;
         result.status = Status.Scheduled;
+        result.place = place;
         return result;
     }
 
+    public long id;
+
     private String reference;
+
+    private Date scheduleTime;
+
+    private String contactName;
+
+    private String contactPhoneNumber;
+
+    private String address;
+
+    private String carModel;
+
+    private CarColor color;
+
+    private Status status;
+
+    private VehicleRegistrationId vehicleRegistrationId;
+
+    private Coordinate place;
+
+    public Coordinate getPlace() {
+        return place;
+    }
+
+    public void setPlace(Coordinate place) {
+        this.place = place;
+    }
 
     public String getReference() {
         return reference;
@@ -71,8 +104,6 @@ public class CarCollection {
         this.reference = reference;
     }
 
-    private Date scheduleTime;
-
     public Date getScheduleTime() {
         return scheduleTime;
     }
@@ -80,8 +111,6 @@ public class CarCollection {
     public void setScheduleTime(Date scheduleTime) {
         this.scheduleTime = scheduleTime;
     }
-
-    private String contactName;
 
     public String getContactName() {
         return contactName;
@@ -91,8 +120,6 @@ public class CarCollection {
         this.contactName = contactName;
     }
 
-    private String contactPhoneNumber;
-
     public String getContactPhoneNumber() {
         return contactPhoneNumber;
     }
@@ -100,8 +127,6 @@ public class CarCollection {
     public void setContactPhoneNumber(String contactPhoneNumber) {
         this.contactPhoneNumber = contactPhoneNumber;
     }
-
-    private String address;
 
     public String getAddress() {
         return address;
@@ -111,8 +136,6 @@ public class CarCollection {
         this.address = address;
     }
 
-    private String carModel;
-
     public String getCarModel() {
         return carModel;
     }
@@ -120,8 +143,6 @@ public class CarCollection {
     public void setCarModel(String carModel) {
         this.carModel = carModel;
     }
-
-    private CarColor color;
 
     public CarColor getColor() {
         return color;
@@ -131,8 +152,6 @@ public class CarCollection {
         this.color = color;
     }
 
-    private Status status;
-
     public Status getStatus() {
         return status;
     }
@@ -140,8 +159,6 @@ public class CarCollection {
     public void setStatus(Status status) {
         this.status = status;
     }
-
-    private VehicleRegistrationId vehicleRegistrationId;
 
     public VehicleRegistrationId getVehicleRegistrationId() {
         return vehicleRegistrationId;
