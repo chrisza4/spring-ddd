@@ -5,7 +5,7 @@ public class Loading {
     private Stock relatedStock;
 
     // And other related fields in the form
-    public void DroppedCarAtWarehouse() {
+    public void droppedCarAtWarehouse() {
         // Do something with its own entity
         // Such as validation, change things, etc.
 
