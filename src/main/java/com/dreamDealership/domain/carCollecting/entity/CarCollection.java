@@ -1,12 +1,12 @@
-package com.dreamDealership.domain.carCollection.entity;
+package com.dreamDealership.domain.carCollecting.entity;
 
 import java.util.Date;
 import java.util.List;
 
-import com.dreamDealership.domain.carCollection.valueObject.CarColor;
-import com.dreamDealership.domain.carCollection.valueObject.Coordinate;
-import com.dreamDealership.domain.carCollection.valueObject.Status;
-import com.dreamDealership.domain.carCollection.valueObject.VehicleRegistrationId;
+import com.dreamDealership.domain.carCollecting.valueObject.CarColor;
+import com.dreamDealership.domain.carCollecting.valueObject.Coordinate;
+import com.dreamDealership.domain.carCollecting.valueObject.Status;
+import com.dreamDealership.domain.carCollecting.valueObject.VehicleRegistrationId;
 import com.dreamDealership.domain.validation.ValidationException;
 
 import io.micrometer.common.util.StringUtils;
@@ -67,7 +67,7 @@ public class CarCollection {
         return result;
     }
 
-    public long id;
+    private long id;
 
     private String reference;
 
@@ -90,6 +90,14 @@ public class CarCollection {
     private Coordinate place;
 
     private List<Pickup> pickups;
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
+    }
 
     public Coordinate getPlace() {
         return place;
@@ -163,7 +171,10 @@ public class CarCollection {
         this.status = status;
     }
 
-    public void carDroppedToWarehouse() {
+    public void carDroppedToWarehouse() throws ValidationException {
+        if (this.status != Status.Scheduled) {
+            throw new ValidationException("Car Collection already dropped");
+        }
         this.status = Status.Dropped;
     }
 

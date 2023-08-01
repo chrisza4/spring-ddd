@@ -1,4 +1,4 @@
-package com.dreamDealership.domain.carCollection.valueObject;
+package com.dreamDealership.domain.carCollecting.valueObject;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,6 +8,10 @@ import com.dreamDealership.domain.validation.ValidationResult;
 public class VehicleRegistrationId {
 
     private final String id;
+
+    public String getId() {
+        return id;
+    }
 
     public VehicleRegistrationId(String id) {
         this.id = id;

@@ -1,4 +1,4 @@
-package com.dreamDealership.domain.carCollection.entity;
+package com.dreamDealership.domain.carCollecting.entity;
 
 import java.util.Date;
 

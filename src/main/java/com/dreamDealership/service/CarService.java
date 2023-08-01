@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dreamDealership.model.Car;
-import com.dreamDealership.repository.CarRepository;
+import com.dreamDealership.persistence.CarRepository;
 
 @Service
 public class CarService {

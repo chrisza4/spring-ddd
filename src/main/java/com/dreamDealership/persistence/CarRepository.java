@@ -1,4 +1,4 @@
-package com.dreamDealership.repository;
+package com.dreamDealership.persistence;
 
 import org.springframework.data.repository.CrudRepository;
 
