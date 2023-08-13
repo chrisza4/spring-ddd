@@ -10,7 +10,15 @@ import com.dreamDealership.domain.carCollecting.valueObject.VehicleRegistrationI
 import com.dreamDealership.domain.validation.ValidationException;
 
 import io.micrometer.common.util.StringUtils;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
+@Entity
 public class CarCollection {
     // Reference, ScheduleTime, Owner, ContactName, ContactPhoneNumber, Address,
     // CarModel, Color, Status, CarRegistrationNumber
@@ -67,6 +75,8 @@ public class CarCollection {
         return result;
     }
 
+    @Id
+    @GeneratedValue
     private long id;
 
     private String reference;
@@ -81,15 +91,30 @@ public class CarCollection {
 
     private String carModel;
 
+    @Enumerated(EnumType.STRING)
     private CarColor color;
 
+    @Enumerated(EnumType.STRING)
     private Status status;
 
+    @Embedded
     private VehicleRegistrationId vehicleRegistrationId;
 
+    @Embedded
     private Coordinate place;
 
+    @OneToMany
     private List<Pickup> pickups;
+
+    // #region Getters-Setters
+
+    public VehicleRegistrationId getVehicleRegistrationId() {
+        return vehicleRegistrationId;
+    }
+
+    public void setVehicleRegistrationId(VehicleRegistrationId vehicleRegistrationId) {
+        this.vehicleRegistrationId = vehicleRegistrationId;
+    }
 
     public void setId(long id) {
         this.id = id;
@@ -171,19 +196,13 @@ public class CarCollection {
         this.status = status;
     }
 
+    // #endregion
+
     public void carDroppedToWarehouse() throws ValidationException {
         if (this.status != Status.Scheduled) {
             throw new ValidationException("Car Collection already dropped");
         }
         this.status = Status.Dropped;
-    }
-
-    public VehicleRegistrationId getVehicleRegistrationId() {
-        return vehicleRegistrationId;
-    }
-
-    public void setVehicleRegistrationId(VehicleRegistrationId vehicleRegistrationId) {
-        this.vehicleRegistrationId = vehicleRegistrationId;
     }
 
     public void recordPickup(PickupResult result, String reason) throws ValidationException {

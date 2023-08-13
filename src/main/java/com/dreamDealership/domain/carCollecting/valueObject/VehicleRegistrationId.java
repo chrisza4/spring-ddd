@@ -5,12 +5,25 @@ import java.util.regex.Pattern;
 
 import com.dreamDealership.domain.validation.ValidationResult;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class VehicleRegistrationId {
 
-    private final String id;
+    @Column(name = "vehicle_registration_id")
+    private String id;
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getId() {
         return id;
+    }
+
+    public VehicleRegistrationId() {
+
     }
 
     public VehicleRegistrationId(String id) {

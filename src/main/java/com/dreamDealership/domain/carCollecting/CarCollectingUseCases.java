@@ -4,27 +4,29 @@ import org.springframework.stereotype.Component;
 
 import com.dreamDealership.domain.carCollecting.entity.CarCollection;
 import com.dreamDealership.domain.validation.ValidationException;
-import com.dreamDealership.persistence.CarCollectingRepositoryJpa;
+import com.dreamDealership.persistence.CarCollectionRepository;
+import com.dreamDealership.persistence.StockRepository;
 
 @Component
 public class CarCollectingUseCases {
-    // For now
-    private CarCollectingRepositoryJpa carCollectingRepository;
 
-    public CarCollectingUseCases(CarCollectingRepositoryJpa carCollectionRepository) {
-        this.carCollectingRepository = carCollectionRepository;
+    private CarCollectionRepository carCollectionRepository;
+    private StockRepository stockRepository;
+
+    public CarCollectingUseCases(CarCollectionRepository carCollectionRepository, StockRepository stockRepository) {
+        this.carCollectionRepository = carCollectionRepository;
+        this.stockRepository = stockRepository;
     }
 
-    public CarCollection dropCarAtWarehouse(int carCollectionId) throws ValidationException {
-        var carCollection = carCollectingRepository.getCarCollectionById(carCollectionId);
-        var stock = carCollectingRepository.getStockByModel(carCollection.getCarModel());
+    public CarCollection dropCarAtWarehouse(long carCollectionId) throws ValidationException {
+        var carCollection = carCollectionRepository.findById(carCollectionId).get();
+        var stock = stockRepository.findByModel(carCollection.getCarModel()).get(0);
 
         carCollection.carDroppedToWarehouse();
         stock.incrementStockCountBy(1);
 
-        carCollection = carCollectingRepository.saveCarCollection(carCollection);
-        carCollectingRepository.saveStock(stock);
-
+        stockRepository.save(stock);
+        carCollection = carCollectionRepository.save(carCollection);
         return carCollection;
     }
 }

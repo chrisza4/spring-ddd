@@ -1,7 +1,14 @@
 package com.dreamDealership.domain.carCollecting.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
+@Entity
 public class Stock {
 
+    @Id
+    @GeneratedValue
     private long id;
     private long quantity;
     private String model;

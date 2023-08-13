@@ -5,8 +5,15 @@ import java.util.Date;
 import com.dreamDealership.domain.validation.ValidationResult;
 
 import io.micrometer.common.util.StringUtils;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
+@Entity
 public class Pickup {
+
+    @Id
+    @GeneratedValue
     private long id;
 
     private Date time;
