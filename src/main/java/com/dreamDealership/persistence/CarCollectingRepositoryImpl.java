@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.dreamDealership.domain.carCollecting.entity.CarCollection;
-import com.dreamDealership.domain.carCollecting.entity.Stock;
+import com.dreamDealership.domain.warehouse.entity.Stock;
 
 @Component
 public class CarCollectingRepositoryImpl implements com.dreamDealership.domain.CarCollectingRepository {

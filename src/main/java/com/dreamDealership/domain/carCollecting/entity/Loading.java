@@ -3,6 +3,7 @@ package com.dreamDealership.domain.carCollecting.entity;
 import java.util.Date;
 
 import com.dreamDealership.domain.validation.ValidationException;
+import com.dreamDealership.domain.warehouse.entity.Stock;
 
 public class Loading {
     private CarCollection relatedCarCollection;

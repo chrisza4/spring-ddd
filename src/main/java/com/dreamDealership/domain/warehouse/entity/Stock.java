@@ -1,4 +1,4 @@
-package com.dreamDealership.domain.carCollecting.entity;
+package com.dreamDealership.domain.warehouse.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

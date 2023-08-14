@@ -1,7 +1,7 @@
 package com.dreamDealership.domain;
 
 import com.dreamDealership.domain.carCollecting.entity.CarCollection;
-import com.dreamDealership.domain.carCollecting.entity.Stock;
+import com.dreamDealership.domain.warehouse.entity.Stock;
 
 public interface CarCollectingRepository {
 
