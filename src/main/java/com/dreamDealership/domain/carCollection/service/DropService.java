@@ -1,15 +1,11 @@
 package com.dreamDealership.domain.carCollection.service;
 
-import com.dreamDealership.repository.DatabaseAccessor;
+import com.dreamDealership.domain.carCollection.entity.CarCollection;
+import com.dreamDealership.domain.carCollection.entity.Stock;
 
 public class DropService {
-    // For now
-    private DatabaseAccessor db;
 
-    public void dropCarAtWarehouse(int carCollectionId) {
-        var carCollection = db.getCarCollectionById(carCollectionId);
-        var stock = db.getStockByModel(carCollection.getCarModel());
-
+    public void dropCarAtWarehouse(CarCollection carCollection, Stock stock) {
         carCollection.carDroppedToWarehouse();
         stock.incrementStockCountBy(1);
     }
